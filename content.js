@@ -1,4 +1,36 @@
 let debounceTimer = null;
+let explorers = [];
+
+// Load JSON once on page load
+fetch(chrome.runtime.getURL('explorers.json'))
+	.then(res => res.json())
+	.then(data => explorers = data)
+	.catch(err => console.error("Failed to load explorers.json", err));
+
+function buildTooltipLinks(text) {
+	if (!explorers.length) return '';
+
+	const isAddress = isSolanaAddress(text);
+	const isSignature = isSolanaSignature(text);
+	if (!isAddress && !isSignature) return '';
+
+	return explorers.map(explorer => {
+		if (isAddress ? explorer.accountUrl === "" : explorer.txUrl === "")
+			return
+
+		const href = isAddress
+			? explorer.accountUrl.replace('{address}', text)
+			: explorer.txUrl.replace('{signature}', text);
+
+		const iconUrl = chrome.runtime.getURL(explorer.icon);
+
+		return `
+      <a href="${href}" target="_blank">
+        <img class="tooltip-img" title="${explorer.name}" alt="${explorer.name}" src="${iconUrl}" />
+      </a>`;
+	}).join('\n');
+}
+
 
 function isSolanaAddress(text) {
 	return /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(text);
@@ -36,27 +68,8 @@ function createTooltip(text, rect) {
 
 	const tooltip = document.createElement('div');
 	tooltip.className = 'solana-tooltip';
+	tooltip.innerHTML = buildTooltipLinks(text);
 
-	let content = '';
-
-	if (isSolanaAddress(text)) {
-		content = `
-    <a href="https://explorer.solana.com/address/${text}" target="_blank"><img class="tooltip-img" title="Explorer" alt="Explorer" src="${chrome.runtime.getURL('icons/explorer.png')}"/></a>
-    <a href="https://solscan.io/account/${text}" target="_blank"><img class="tooltip-img" title="SolScan" alt="SolScan" src="${chrome.runtime.getURL('icons/solscan.png')}"/></a>
-    <a href="https://explorer.fogo.io/address/${text}" target="_blank"><img class="tooltip-img" title="FogoScan" alt="FogoScan" src="${chrome.runtime.getURL('icons/fogo.png')}"/></a>
-  `;
-	} else if (isSolanaSignature(text)) {
-		content = `
-    <a href="https://explorer.solana.com/tx/${text}" target="_blank"><img class="tooltip-img" title="Explorer" alt="Explorer" src="${chrome.runtime.getURL('icons/explorer.png')}"/></a>
-    <a href="https://solscan.io/tx/${text}" target="_blank"><img class="tooltip-img" title="SolScan" alt="SolScan" src="${chrome.runtime.getURL('icons/solscan.png')}"/></a>
-    <a href="https://explorer.fogo.io/transaction/${text}" target="_blank"><img class="tooltip-img" title="FogoScan" alt="FogoScan" src="${chrome.runtime.getURL('icons/fogo.png')}"/></a>
-  `;
-	}
-
-
-	if (!content) return;
-
-	tooltip.innerHTML = content;
 	tooltip.style.left = `${window.scrollX + rect.left + 10}px`;
 	tooltip.style.top = `${window.scrollY + rect.bottom + 10}px`;
 

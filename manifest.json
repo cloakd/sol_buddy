@@ -1,8 +1,15 @@
 {
   "manifest_version": 3,
-  "name": "Solana Address Tooltip",
-  "version": "1.3",
-  "description": "Show custom links when a Solana address is selected.",
+  "name": "Solana Tooltip Extension",
+  "version": "1.3.0",
+  "description": "Shows quick links to Solana explorers when hovering or selecting an address or signature.",
+  "author":  "Cloakd",
+  "homepage_url": "https://github.com/cloakd/sol_buddy",
+  "icons": {
+	"16": "icons/fluxbeam.png",
+	"48": "icons/fluxbeam.png",
+	"128": "icons/fluxbeam.png"
+  },
   "permissions": [
 	"scripting"
   ],
@@ -25,7 +32,8 @@
   "web_accessible_resources": [
 	{
 	  "resources": [
-		"icons/*.png"
+		"icons/*.png",
+		"explorers.json"
 	  ],
 	  "matches": [
 		"<all_urls>"

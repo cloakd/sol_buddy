@@ -1,0 +1,32 @@
+[
+  {
+	"name": "Explorer",
+	"icon": "icons/explorer.png",
+	"accountUrl": "https://explorer.solana.com/address/{address}",
+	"txUrl": "https://explorer.solana.com/tx/{signature}"
+  },
+  {
+	"name": "SolScan",
+	"icon": "icons/solscan.png",
+	"accountUrl": "https://solscan.io/account/{address}",
+	"txUrl": "https://solscan.io/tx/{signature}"
+  },
+  {
+	"name": "FogoScan",
+	"icon": "icons/fogo.png",
+	"accountUrl": "https://explorer.fogo.io/address/{address}",
+	"txUrl": "https://explorer.fogo.io/transaction/{signature}"
+  },
+  {
+	"name": "Flux",
+	"icon": "icons/fluxbeam.png",
+	"accountUrl": "https://fluxbeam.xyz/{address}",
+	"txUrl": ""
+  },
+  {
+	"name": "RugCheck",
+	"icon": "icons/rugcheck.png",
+	"accountUrl": "https://rugcheck.xyz/tokens/{address}",
+	"txUrl": ""
+  }
+]
