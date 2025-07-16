@@ -80,6 +80,19 @@ function removeTooltip() {
 	document.querySelectorAll('.solana-tooltip').forEach(el => el.remove());
 }
 
+
+let isDragging = false;
+let latestSelection = null;
+
+// Track drag
+document.addEventListener('mousedown', () => {
+	isDragging = false;
+});
+
+document.addEventListener('mousemove', () => {
+	isDragging = true;
+});
+
 document.addEventListener('selectionchange', () => {
 	if (debounceTimer) clearTimeout(debounceTimer);
 	debounceTimer = setTimeout(() => {
@@ -100,6 +113,12 @@ document.addEventListener('selectionchange', () => {
 });
 
 document.addEventListener('click', (e) => {
+	if (isDragging) {
+		// Reset and ignore drag click
+		isDragging = false;
+		return;
+	}
+	
 	if (!e.target.closest('.solana-tooltip')) {
 		removeTooltip();
 	}

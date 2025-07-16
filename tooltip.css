@@ -1,6 +1,6 @@
 .solana-tooltip {
 	position: absolute;
-	background: #1e1e2f;
+	background: rgba(30,30,63, 0.8);
 	color: #fff;
 	padding: 5px;
 	border-radius: 8px;
@@ -8,6 +8,9 @@
 	box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 	z-index: 9999;
 	max-width: 220px;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
 }
 
 .solana-tooltip a {
