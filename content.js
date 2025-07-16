@@ -22,11 +22,12 @@ function buildTooltipLinks(text) {
 			? explorer.accountUrl.replace('{address}', text)
 			: explorer.txUrl.replace('{signature}', text);
 
+		console.log("Getting icon", explorer)
 		const iconUrl = chrome.runtime.getURL(explorer.icon);
 
 		return `
       <a href="${href}" target="_blank">
-        <img class="tooltip-img" title="${explorer.name}" alt="${explorer.name}" src="${iconUrl}" />
+        <img class="tooltip-img-sbgg" title="${explorer.name}" alt="${explorer.name}" src="${iconUrl}" />
       </a>`;
 	}).join('\n');
 }
@@ -60,14 +61,14 @@ function getSelectionText() {
 		if (parentEl && ['INPUT', 'TEXTAREA'].includes(parentEl.tagName)) return null;
 	}
 
-	return { text, rect };
+	return {text, rect};
 }
 
 function createTooltip(text, rect) {
 	removeTooltip();
 
 	const tooltip = document.createElement('div');
-	tooltip.className = 'solana-tooltip';
+	tooltip.className = 'solana-tooltip-sbggg';
 	tooltip.innerHTML = buildTooltipLinks(text);
 
 	tooltip.style.left = `${window.scrollX + rect.left + 10}px`;
@@ -77,7 +78,7 @@ function createTooltip(text, rect) {
 }
 
 function removeTooltip() {
-	document.querySelectorAll('.solana-tooltip').forEach(el => el.remove());
+	document.querySelectorAll('.solana-tooltip-sbggg').forEach(el => el.remove());
 }
 
 
@@ -102,12 +103,10 @@ document.addEventListener('selectionchange', () => {
 			return;
 		}
 
-		const { text, rect } = selection;
+		const {text, rect} = selection;
 
 		if (isSolanaAddress(text) || isSolanaSignature(text)) {
 			createTooltip(text, rect);
-		} else {
-			removeTooltip();
 		}
 	}, 100);
 });
@@ -118,7 +117,7 @@ document.addEventListener('click', (e) => {
 		isDragging = false;
 		return;
 	}
-	
+
 	if (!e.target.closest('.solana-tooltip')) {
 		removeTooltip();
 	}

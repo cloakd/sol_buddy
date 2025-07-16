@@ -1,34 +1,32 @@
-.solana-tooltip {
+.solana-tooltip-sbggg {
 	position: absolute;
-	background: rgba(30,30,63, 0.8);
-	color: #fff;
-	padding: 5px;
+	background: rgba(30, 30, 63, 0.8);
 	border-radius: 8px;
 	font-size: 14px;
-	box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+	line-height: 1px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 	z-index: 9999;
 	max-width: 220px;
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: space-between;
 	align-items: center;
+	box-sizing: border-box;
 }
 
-.solana-tooltip a {
+.solana-tooltip-sbggg a {
 	text-decoration: none;
-}
-
-.solana-tooltip a:hover {
-	text-decoration: none;
-}
-
-.solana-tooltip a:hover img{
-	background-color: rgba(255,255,255,0.2);
-}
-
-.tooltip-img {
-	width: 32px;
-	height: 32px;
-	padding: 7px;
 	transition: background-color 0.2s linear;
+	margin-bottom: 0 !important;
+}
+
+.solana-tooltip-sbggg a:hover {
+	text-decoration: none;
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
+.tooltip-img-sbgg {
+	width: 28px;
+	height: 28px;
 	border-radius: 8px;
+	margin: 4px;
 }

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Solana Tooltip Extension",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Shows quick links to Solana explorers when hovering or selecting an address or signature.",
   "author":  "Cloakd",
   "homepage_url": "https://github.com/cloakd/sol_buddy",
