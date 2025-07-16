@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "Solana Address Tooltip",
+  "version": "1.3",
+  "description": "Show custom links when a Solana address is selected.",
+  "permissions": [
+	"scripting"
+  ],
+  "host_permissions": [
+	"<all_urls>"
+  ],
+  "content_scripts": [
+	{
+	  "matches": [
+		"<all_urls>"
+	  ],
+	  "js": [
+		"content.js"
+	  ],
+	  "css": [
+		"tooltip.css"
+	  ]
+	}
+  ],
+  "web_accessible_resources": [
+	{
+	  "resources": [
+		"icons/*.png"
+	  ],
+	  "matches": [
+		"<all_urls>"
+	  ]
+	}
+  ]
+}
